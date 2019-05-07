@@ -1,33 +1,38 @@
 <div class="hms-header">
-  <div class="hms-header__logo" *ngIf="logo">
-    <a [routerLink]="logo.homePageUrl">
-      <img [src]="logo.imgUrl" [alt]="logo.alt">
+  <div class="hms-header__logo" *ngIf="headerData.logo">
+    <a [routerLink]="headerData.logo.homePageUrl">
+      <img [src]="headerData.logo.imgUrl" [alt]="headerData.logo.alt">
     </a>
   </div>
   <div class="hms-header__title">
-    <div>{{title}}</div>
+    <div>{{headerData.title}}</div>
   </div>
   <div class="hms-header__general-search">
-    <input type="search" class="form-control" placeholder="Search">
+    <input type="search" class="form-control" placeholder="Search"
+    #searchInput (search)="onSearch(searchInput.value)">
   </div>
   <div class="hms-header__menu">
     <nav class="navbar navbar-expand-lg">
       <ul class="navbar-nav">
-        <li *ngFor="let menuItem of menu" class="nav-item">
+        <li *ngFor="let menuItem of headerData.menu" class="nav-item">
           <a class="nav-link" [routerLink]="menuItem.url">{{menuItem.displayText}}</a>
         </li>
       </ul>
     </nav>
   </div>
   <div class="hms-header__user">
-    <div class="dropdown">
-      <button class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
-        <img src="/assets/images/avatar-1.png" alt="Avatar User">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-default" id="userMenu" ngbDropdownToggle>
+        <img [src]="headerData.user.avatarUrl" alt="Avatar User">
       </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+      <div ngbDropdownMenu aria-labelledby="userMenu">
+        <div class="hms-header_user-info" ngbDropdownItem>
+          <div>{{headerData.user.lastName}} {{headerData.user.firstName}}</div>
+          <div>{{headerData.user.email}}</div>
+        </div>
+        <button ngbDropdownItem (click)="onClickUpdateProfile()">{{headerData.userMenuLanguage.profile}}</button>
+        <button ngbDropdownItem (click)="onClickChangePassword()">{{headerData.userMenuLanguage.changePassword}}</button>
+        <button ngbDropdownItem (click)="onClickSignOut()">{{headerData.userMenuLanguage.signOut}}</button>
       </div>
     </div>
   </div>
