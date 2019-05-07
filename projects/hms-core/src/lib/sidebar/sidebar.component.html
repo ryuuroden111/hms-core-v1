@@ -1,0 +1,13 @@
+<div class="sidebar-container">
+  <nav class="sidebar">
+    <div class="sidebar__header">
+      <h3>{{sideBarData.title}}</h3>
+    </div>
+    <ul class="list-unstyled components">
+      <hr>    
+      <li *ngFor="let menuItem of sideBarData.menu" routerLinkActive="active">
+        <a [routerLink]="menuItem.url" >{{menuItem.displayText}}</a>
+      </li>
+    </ul>
+  </nav>
+</div>

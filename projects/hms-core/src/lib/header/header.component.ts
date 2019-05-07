@@ -1,39 +1,37 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Logo } from './models/logo.model';
-import { MenuItem } from './models/menu-item.model';
-import { User } from './models/user.model';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Header } from './models/header.model';
 
 @Component({
-  selector: 'hms-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'hms-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-    @Input() logo: Logo = {
-        imgUrl: '/favicon.ico',
-        alt: 'HMS LOGO',
-        homePageUrl: ''
+    @Input() public headerData: Header;
+
+    @Output() public searchTerm: EventEmitter<string> = new EventEmitter<string>();
+    @Output() public updateProfile: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() public changePassword: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() public signOut: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    constructor() { }
+
+    ngOnInit() {
     }
-    @Input() title = 'HMS 1.0';
-    @Input() menu: MenuItem[] = [
-        {
-            displayText: 'menu 1',
-            url: '/dashboard'
-        },
-        {
-            displayText: 'menu 2',
-            url: ''
-        },
-        {
-            displayText: 'menu 3',
-            url: '/dashboard'
-        },
-    ];
-    @Input() user: User;
 
-  constructor() { }
+    public onClickUpdateProfile(): void {
+        this.updateProfile.emit();
+    }
 
-  ngOnInit() {
-  }
+    public onClickChangePassword(): void {
+        this.changePassword.emit();
+    }
 
+    public onClickSignOut(): void {
+        this.signOut.emit();
+    }
+
+    public onSearch(searchTerm: string): void {
+        this.searchTerm.emit(searchTerm);
+    }
 }

@@ -1,6 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div>
-    <hms-header></hms-header>
-    <router-outlet></router-outlet>
+<div class="app">
+    <hms-header [headerData]="headerData" (searchTerm)="onSearch($event)" 
+    (updateProfile)="onUpdateProfile()" (changePassword)="onChangePassword()" (signOut)="onSignOut()"></hms-header>
+    <div>{{updateProfileMessage}}</div>
+    <div>{{changePasswordMessage}}</div>
+    <div>{{signOutMessage}}</div>
+    <div class="app__body">
+        <hms-sidebar [sideBarData]="sideBarData"></hms-sidebar>
+        <router-outlet></router-outlet>
+        <div style="height: 700px;"></div>
+    </div>
+    <hms-footer [footerData]="footerData"></hms-footer>
 </div>
 

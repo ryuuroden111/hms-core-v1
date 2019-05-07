@@ -69,11 +69,7 @@
             "styles": [
               "projects/hms-core-docs/src/styles.scss"
             ],
-            "scripts": [
-                "node_modules/jquery/dist/jquery.slim.js",
-                "node_modules/bootstrap/dist/js/bootstrap.js",
-                "node_modules/popper.js/dist/popper.min.js"
-            ],
+            "scripts": [ ],
             "es5BrowserSupport": true
           },
           "configurations": {
