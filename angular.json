@@ -2,5 +2,179 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "hms-core": {
+      "root": "projects/hms-core",
+      "sourceRoot": "projects/hms-core/src",
+      "projectType": "library",
+      "prefix": "hms",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/hms-core/tsconfig.lib.json",
+            "project": "projects/hms-core/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/hms-core/src/test.ts",
+            "tsConfig": "projects/hms-core/tsconfig.spec.json",
+            "karmaConfig": "projects/hms-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/hms-core/tsconfig.lib.json",
+              "projects/hms-core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "hms-core-docs": {
+      "root": "projects/hms-core-docs/",
+      "sourceRoot": "projects/hms-core-docs/src",
+      "projectType": "application",
+      "prefix": "",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/hms-core-docs",
+            "index": "projects/hms-core-docs/src/index.html",
+            "main": "projects/hms-core-docs/src/main.ts",
+            "polyfills": "projects/hms-core-docs/src/polyfills.ts",
+            "tsConfig": "projects/hms-core-docs/tsconfig.app.json",
+            "assets": [
+              "projects/hms-core-docs/src/favicon.ico",
+              "projects/hms-core-docs/src/assets"
+            ],
+            "styles": [
+              "projects/hms-core-docs/src/styles.scss"
+            ],
+            "scripts": [
+                "node_modules/jquery/dist/jquery.slim.js",
+                "node_modules/bootstrap/dist/js/bootstrap.js",
+                "node_modules/popper.js/dist/popper.min.js"
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [{
+                "replace": "projects/hms-core-docs/src/environments/environment.ts",
+                "with": "projects/hms-core-docs/src/environments/environment.prod.ts"
+              }],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [{
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              }]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "hms-core-docs:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "hms-core-docs:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "hms-core-docs:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/hms-core-docs/src/test.ts",
+            "polyfills": "projects/hms-core-docs/src/polyfills.ts",
+            "tsConfig": "projects/hms-core-docs/tsconfig.spec.json",
+            "karmaConfig": "projects/hms-core-docs/karma.conf.js",
+            "styles": [
+              "projects/hms-core-docs/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/hms-core-docs/src/favicon.ico",
+              "projects/hms-core-docs/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/hms-core-docs/tsconfig.app.json",
+              "projects/hms-core-docs/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "hms-core-docs-e2e": {
+      "root": "projects/hms-core-docs-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/hms-core-docs-e2e/protractor.conf.js",
+            "devServerTarget": "hms-core-docs:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "hms-core-docs:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/hms-core-docs-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "hms-core"
 }

@@ -1,0 +1,34 @@
+<div class="hms-header">
+  <div class="hms-header__logo" *ngIf="logo">
+    <a [routerLink]="logo.homePageUrl">
+      <img [src]="logo.imgUrl" [alt]="logo.alt">
+    </a>
+  </div>
+  <div class="hms-header__title">
+    <div>{{title}}</div>
+  </div>
+  <div class="hms-header__general-search">
+    <input type="search" class="form-control" placeholder="Search">
+  </div>
+  <div class="hms-header__menu">
+    <nav class="navbar navbar-expand-lg">
+      <ul class="navbar-nav">
+        <li *ngFor="let menuItem of menu" class="nav-item">
+          <a class="nav-link" [routerLink]="menuItem.url">{{menuItem.displayText}}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="hms-header__user">
+    <div class="dropdown">
+      <button class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
+        <img src="/assets/images/avatar-1.png" alt="Avatar User">
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+    </div>
+  </div>
+</div>

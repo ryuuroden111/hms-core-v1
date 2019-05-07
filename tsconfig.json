@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "hms-core": [
+        "dist/hms-core"
+      ],
+      "hms-core/*": [
+        "dist/hms-core/*"
+      ]
+    }
   }
 }

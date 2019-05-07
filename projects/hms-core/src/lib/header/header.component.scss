@@ -1,0 +1,34 @@
+.hms-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  -webkit-box-shadow: 0px 5px 3px 0px rgba(22, 80, 168, 0.75);
+  -moz-box-shadow: 0px 5px 3px 0px rgba(22, 80, 168, 0.75);
+  box-shadow: 0px 5px 3px 0px rgba(22, 80, 168, 0.75);
+
+  &__logo {
+    margin: auto 5px;
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  &__title {
+    margin: auto 5px;
+  }
+
+  &__general-search {
+    margin-left: 10px;
+  }
+
+  &__menu {
+    margin-left: auto;
+    margin-right: 10px;
+  }
+
+  &__user {
+      margin: auto 10px;
+  }
+  
+}
